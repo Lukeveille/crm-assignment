@@ -36,7 +36,7 @@ class CRM
     when 5 then
       query = search_by_attribute
       if query != nil
-        puts "#{query.id} : #{query.full_name} - #{query.email} - #{query.note}"
+        print_entry(query)
         breakline
       end
     when 6 then @quit = true
@@ -47,14 +47,24 @@ class CRM
   def add_new_contact
     print 'Enter First Name: '
     first_name = gets.chomp
-    breakpoint
+    breakline
+
     print 'Enter Last Name: '
     last_name = gets.chomp
-    breakpoint
+    breakline
+
     print 'Enter Email Address: '
     email = gets.chomp
+    breakline
+
+    print 'Enter a note: '
+    note = gets.chomp
     breakpoint
-    Contact.create(first_name, last_name, email)
+
+    query = Contact.create(first_name, last_name, email, note)
+
+    print_entry(query)
+    breakline
   end
 
   # Modify a contact that is already in list.
@@ -62,18 +72,23 @@ class CRM
     selected_contact = self.search_by_attribute
 
     if selected_contact != nil
+      print_entry(selected_contact)
+      breakline
       puts "What would you like to modify?: "
       attribute = make_selection(false)
       value = gets.chomp.to_s
       selected_contact.update(attribute, value)
       breakpoint
+      print_entry(selected_contact)
+      breakline
+
     end
   end
 
   # Delete a specific contact
   def delete_contact
     selected_contact = self.search_by_attribute
-    print "Are you sure you want to delete #{selected_contact.full_name}? (y to continue)"
+    print "Are you sure you want to delete #{selected_contact.full_name}? (y to continue) "
     delete_now = gets.chomp.upcase
     if delete_now == 'Y'
       selected_contact.delete
@@ -84,15 +99,16 @@ class CRM
   # Prints a list of every contact to the screen.
   def display_all_contacts
     Contact.all.each do |contact|
-      puts "#{contact.id} : #{contact.full_name} - #{contact.email} - #{contact.note}"
+      print_entry(contact)
     end
     breakline
   end
 
   # Searches for a specific contact, prompting the user for an attribute and a value.
   def search_by_attribute
+    display_all_contacts
 
-    puts "Find user by: "
+    puts "Select user by: "
     
     attribute = make_selection(true)
     value = gets.chomp.upcase
@@ -108,7 +124,7 @@ class CRM
     end
   end
 
-  # Chooses which attribute will be accessed, will only show ID for reading, not writing.
+  # Chooses which attribute will be accessed. Will only show "[5] ID" for reading, not writing.
   def make_selection(id)
     
     choose = 0
@@ -121,13 +137,14 @@ class CRM
       if id
         puts '[5] ID'
       end
-      puts 'Enter a number: '
-    
+      puts "\nEnter a number:"
+
       choose = gets.chomp.to_i
-      breakpoint
       if id
+        breakline
         break if choose >= 1 && choose < 6
       else
+        breakpoint
         break if choose >= 1 && choose < 5
       end
       puts "Invalid selection!"
@@ -158,7 +175,12 @@ class CRM
     end
   end
 
-  # Prints blank screen break line to help readability.
+  # Prints all relevant contact attributes in a standard format
+  def print_entry(contact)
+    puts "#{contact.id} : #{contact.full_name} - #{contact.email} - #{contact.note}"
+  end
+
+  # Prints blank screen or break line, to help readability.
   def breakpoint
     puts "\e[H\e[2J"
   end
