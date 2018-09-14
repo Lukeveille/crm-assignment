@@ -2,7 +2,7 @@ require_relative 'contact'
 
 class CRM
 
-  # Main loop, will run until user chooses 6
+  # Main loop, will run until user chooses 6.
   def main_menu
     @quit = false
     loop do # repeat indefinitely
@@ -14,7 +14,7 @@ class CRM
     end
   end
 
-  # Prints the main menu selections
+  # Prints the main menu selections.
   def print_main_menu
     puts '[1] Add a new contact'
     puts '[2] Modify an existing contact'
@@ -25,7 +25,7 @@ class CRM
     puts 'Enter a number: '
   end
 
-  # Will interpret the user input and move on to the selected method
+  # Will interpret the user input and move on to the selected method.
   def call_option(user_selected)
     case user_selected
     when 1 then add_new_contact
@@ -42,7 +42,7 @@ class CRM
     end
   end
 
-  # Adds a new contact, will prompt
+  # Adds a new contact, will prompt for first name, last name, and e-mail.
   def add_new_contact
     print 'Enter First Name: '
     first_name = gets.chomp
@@ -56,6 +56,7 @@ class CRM
     Contact.create(first_name, last_name, email)
   end
 
+  # Modify a contact that is already in list.
   def modify_existing_contact
     selected_contact = self.search_by_attribute
 
@@ -68,6 +69,7 @@ class CRM
     end
   end
 
+  # Delete a specific contact
   def delete_contact
     selected_contact = self.search_by_attribute
     print "Are you sure you want to delete #{selected_contact.full_name}? (y to continue)"
@@ -77,6 +79,7 @@ class CRM
     end
   end
 
+  # Prints a list of every contact to the screen.
   def display_all_contacts
     Contact.all.each do |contact|
       puts "#{contact.id} : #{contact.full_name} - #{contact.email} - #{contact.note}"
@@ -84,7 +87,7 @@ class CRM
     breakpoint
   end
 
-  # Searches for a specific contact using an attribute and a value
+  # Searches for a specific contact, prompting the user for an attribute and a value.
   def search_by_attribute
 
     puts "Find user by: "
@@ -103,6 +106,7 @@ class CRM
     end
   end
 
+  # Chooses which attribute will be accessed, will only show ID for reading, not writing.
   def make_selection(id)
     puts '[1] First Name'
     puts '[2] Last Name'
@@ -150,6 +154,7 @@ class CRM
     end
   end
 
+  # Prints a break line to help readability.
   def breakpoint
     puts "\n-------------------\n\n"
   end
