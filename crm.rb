@@ -5,6 +5,7 @@ class CRM
   # Main loop, will run until user chooses 6.
   def main_menu
     @quit = false
+    breakpoint
     loop do # repeat indefinitely
       print_main_menu
       user_selected = gets.to_i
@@ -36,7 +37,7 @@ class CRM
       query = search_by_attribute
       if query != nil
         puts "#{query.id} : #{query.full_name} - #{query.email} - #{query.note}"
-        breakpoint
+        breakline
       end
     when 6 then @quit = true
     end
@@ -77,6 +78,7 @@ class CRM
     if delete_now == 'Y'
       selected_contact.delete
     end
+    breakpoint
   end
 
   # Prints a list of every contact to the screen.
@@ -84,7 +86,7 @@ class CRM
     Contact.all.each do |contact|
       puts "#{contact.id} : #{contact.full_name} - #{contact.email} - #{contact.note}"
     end
-    breakpoint
+    breakline
   end
 
   # Searches for a specific contact, prompting the user for an attribute and a value.
@@ -102,23 +104,25 @@ class CRM
       return contact_to_modify
     else
       puts "There is no user with that #{attribute.gsub("_", " ")}!"
-      breakpoint
+      breakline
     end
   end
 
   # Chooses which attribute will be accessed, will only show ID for reading, not writing.
   def make_selection(id)
-    puts '[1] First Name'
-    puts '[2] Last Name'
-    puts '[3] E-mail'
-    puts '[4] Notes'
-    if id
-      puts '[5] ID'
-    end
     
     choose = 0
 
     loop do
+      puts '[1] First Name'
+      puts '[2] Last Name'
+      puts '[3] E-mail'
+      puts '[4] Notes'
+      if id
+        puts '[5] ID'
+      end
+      puts 'Enter a number: '
+    
       choose = gets.chomp.to_i
       breakpoint
       if id
@@ -154,8 +158,11 @@ class CRM
     end
   end
 
-  # Prints a break line to help readability.
+  # Prints blank screen break line to help readability.
   def breakpoint
+    puts "\e[H\e[2J"
+  end
+  def breakline
     puts "\n-------------------\n\n"
   end
 
