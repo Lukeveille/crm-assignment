@@ -81,5 +81,6 @@ class Contact
   end
 
   # Feel free to add other methods here, if you need them.
-  attr_accessor :first_name, :last_name, :email, :note, :id
+  attr_accessor :first_name, :last_name, :email, :note
+  attr_reader :id
 end

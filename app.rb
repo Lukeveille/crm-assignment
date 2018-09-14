@@ -5,6 +5,10 @@ ed = Contact.create("Ed", "Dude", "edthedude@gmail.com", "This is Ed, he's a dud
 ted = Contact.create("Ted", "Fundy", "ted@gmail.com")
 ned = Contact.create("Ned", "Stark", "winteriscoming@gmail.com", "This is ned, he is dead.")
 
+control = CRM.new
+
+control.main_menu
+
 # puts ed.full_name
 # puts ted.full_name
 # puts ned.full_name
@@ -22,7 +26,3 @@ ned = Contact.create("Ned", "Stark", "winteriscoming@gmail.com", "This is ned, h
 # puts ted.notes
 
 # binding.pry
-
-control = CRM.new
-
-control.main_menu

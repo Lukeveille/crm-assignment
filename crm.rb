@@ -23,7 +23,7 @@ class CRM
     puts '[4] Display all the contacts'
     puts '[5] Search by attribute'
     puts '[6] Exit'
-    puts 'Enter a number: '
+    print "\nEnter a number: "
   end
 
   # Will interpret the user input and move on to the selected method.
@@ -57,8 +57,11 @@ class CRM
     email = gets.chomp
     breakline
 
-    print 'Enter a note: '
+    puts 'Enter a note: '
     note = gets.chomp
+    if note == ''
+      note = 'N/A'
+    end
     breakpoint
 
     query = Contact.create(first_name, last_name, email, note)
@@ -77,7 +80,9 @@ class CRM
       puts "What would you like to modify?: "
       attribute = make_selection(false)
       value = gets.chomp.to_s
-      selected_contact.update(attribute, value)
+      if value != ''
+        selected_contact.update(attribute, value)
+      end
       breakpoint
       print_entry(selected_contact)
       breakline
@@ -88,12 +93,14 @@ class CRM
   # Delete a specific contact
   def delete_contact
     selected_contact = self.search_by_attribute
-    print "Are you sure you want to delete #{selected_contact.full_name}? (y to continue) "
-    delete_now = gets.chomp.upcase
-    if delete_now == 'Y'
-      selected_contact.delete
+    if selected_contact != nil
+      print "Are you sure you want to delete #{selected_contact.full_name}? (y to continue) "
+      delete_now = gets.chomp.upcase
+      if delete_now == 'Y'
+        selected_contact.delete
+      end
+      breakpoint
     end
-    breakpoint
   end
 
   # Prints a list of every contact to the screen.
@@ -137,35 +144,42 @@ class CRM
       if id
         puts '[5] ID'
       end
-      puts "\nEnter a number:"
+      print "\nEnter a number: "
 
       choose = gets.chomp.to_i
       if id
-        breakline
+        breakpoint
         break if choose >= 1 && choose < 6
+        display_all_contacts
+        puts "Invalid selection!"
+        puts "Select user by: "
       else
         breakpoint
         break if choose >= 1 && choose < 5
       end
-      puts "Invalid selection!"
+    end
+
+    if id
+      breakpoint
+      display_all_contacts
     end
 
     case choose
     when 1 then
-      puts 'Enter a first name:'
+      print 'Enter a first name: '
       return "first_name"
     when 2 then
-      puts 'Enter a last name:'
+      print 'Enter a last name: '
       return "last_name"
     when 3 then
-      puts 'Enter an e-mail address:'
+      print 'Enter an e-mail address: '
       return "email"
     when 4 then
       puts 'Enter a note:'
       return "note"
     when 5 then
       if id
-        puts 'Enter an ID #:'
+        print 'Enter an ID #: '
         return "id"
       else
         return nil
