@@ -62,7 +62,12 @@ class CRM
     end
     breakpoint
 
-    query = Contact.create(first_name, last_name, email, note)
+    query = Contact.create(
+      first_name: first_name,
+      last_name: last_name,
+      email: email,
+      note: note,
+    )
 
     print_entry(query)
     breakline
@@ -79,7 +84,8 @@ class CRM
       attribute = make_selection(false)
       value = gets.chomp.to_s
       if value != ""
-        selected_contact.update(attribute, value)
+        search_hash = {attribute => value}
+        selected_contact.update(search_hash)
       end
       breakpoint
       print_entry(selected_contact)
@@ -92,7 +98,7 @@ class CRM
     selected_contact = self.search_by_attribute
     if selected_contact != nil
       print "Are you sure you want to delete #{selected_contact.full_name}? (y to continue) "
-      delete_now = gets.chomp.upcase
+      delete_now = gets.chomp
       if delete_now == "Y"
         selected_contact.delete
       end
@@ -115,15 +121,17 @@ class CRM
     puts "Select user by: "
 
     attribute = make_selection(true)
-    value = gets.chomp.upcase
+    value = gets.chomp
 
-    contact_to_modify = Contact.find_by(attribute, value)
+    search_hash = {attribute => value}
+    contact_to_modify = Contact.find_by(search_hash)
+    puts contact_to_modify
 
     breakpoint
     if contact_to_modify != nil
       return contact_to_modify
     else
-      puts "There is no user with that #{attribute.gsub("_", " ")}!"
+      puts "There is no user with that #{attribute.to_s.gsub("_", " ")}!"
       breakline
     end
   end
@@ -163,20 +171,20 @@ class CRM
     case choose
     when 1
       print "Enter a first name: "
-      return "first_name"
+      return :first_name
     when 2
       print "Enter a last name: "
-      return "last_name"
+      return :last_name
     when 3
       print "Enter an e-mail address: "
-      return "email"
+      return :email
     when 4
       puts "Enter a note:"
-      return "note"
+      return :note
     when 5
       if id
         print "Enter an ID #: "
-        return "id"
+        return :id
       else
         return nil
       end

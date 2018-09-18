@@ -1,9 +1,24 @@
 require_relative "crm"
 require "pry-nav"
 
-ed = Contact.create("Ed", "Dude", "edthedude@gmail.com", "This is Ed, he's a dude.")
-ted = Contact.create("Ted", "Fundy", "ted@gmail.com")
-ned = Contact.create("Ned", "Stark", "winteriscoming@gmail.com", "This is ned, he is dead.")
+# ed = Contact.create(
+#   first_name: "Ed",
+#   last_name: "Dude",
+#   email: "edthedude@gmail.com",
+#   note: "This is Ed, he's a dude.",
+# )
+# ted = Contact.create(
+#   first_name: "Ted",
+#   last_name: "Fundy",
+#   email: "ted@gmail.com",
+#   note: "",
+# )
+# ned = Contact.create(
+#   first_name: "Ned",
+#   last_name: "Stark",
+#   email: "winteriscoming@gmail.com",
+#   note: "This is ned, he is dead.",
+# )
 
 control = CRM.new
 
