@@ -4,14 +4,12 @@ class CRM
 
   # Main loop, will run until user chooses 6.
   def main_menu
-    @quit = false
     breakpoint
     loop do # repeat indefinitely
       print_main_menu
       user_selected = gets.to_i
       breakpoint
       call_option(user_selected)
-      break if @quit == true
     end
   end
 
@@ -39,7 +37,7 @@ class CRM
         print_entry(query)
         breakline
       end
-    when 6 then @quit = true
+    when 6 then exit!
     end
   end
 
@@ -200,4 +198,8 @@ class CRM
   def breakline
     puts "\n-------------------\n\n"
   end
+end
+
+at_exit do
+  ActiveRecord::Base.connection.close
 end
