@@ -1,5 +1,5 @@
-require_relative 'crm'
-require 'pry-nav'
+require_relative "crm"
+require "pry-nav"
 
 ed = Contact.create("Ed", "Dude", "edthedude@gmail.com", "This is Ed, he's a dude.")
 ted = Contact.create("Ted", "Fundy", "ted@gmail.com")

@@ -1,4 +1,10 @@
-class Contact
+gem "activerecord", "=4.2.7"
+require "active_record"
+require "mini_record"
+
+ActiveRecord::Base.establish_connection(adapter: "sqlite3", database: "crm.sqlite3")
+
+class Contact < ActiveRecord::Base
   # Class variables
   @@list = []
   @@next_id = 1
@@ -11,7 +17,7 @@ class Contact
     @note = note
   end
 
-  # This method should call the initializer, 
+  # This method should call the initializer,
   # store the newly created contact, and then return it
   def self.create(first_name, last_name, email, note = "N/A")
     new_contact = self.new(first_name, last_name, email, note)
@@ -49,14 +55,14 @@ class Contact
 
   # This method should delete all of the contacts
   def self.delete_all
-    print 'Are you sure you want to delete ALL contacts? (y to continue)'
+    print "Are you sure you want to delete ALL contacts? (y to continue)"
     delete_now = gets.chomp.upcase
-    if delete_now == 'Y'
+    if delete_now == "Y"
       @@list = []
     end
   end
 
-  # This method should allow you to specify 
+  # This method should allow you to specify
   # 1. which of the contact's attributes you want to update
   # 2. the new value for that attribute
   # and then make the appropriate change to the contact
@@ -81,6 +87,6 @@ class Contact
   end
 
   # Feel free to add other methods here, if you need them.
-  attr_accessor :first_name, :last_name, :email, :note
-  attr_reader :id
+  # attr_accessor :first_name, :last_name, :email, :note
+  # attr_reader :id
 end

@@ -1,4 +1,4 @@
-require_relative 'contact'
+require_relative "contact"
 
 class CRM
 
@@ -17,12 +17,12 @@ class CRM
 
   # Prints the main menu selections.
   def print_main_menu
-    puts '[1] Add a new contact'
-    puts '[2] Modify an existing contact'
-    puts '[3] Delete a contact'
-    puts '[4] Display all the contacts'
-    puts '[5] Search by attribute'
-    puts '[6] Exit'
+    puts "[1] Add a new contact"
+    puts "[2] Modify an existing contact"
+    puts "[3] Delete a contact"
+    puts "[4] Display all the contacts"
+    puts "[5] Search by attribute"
+    puts "[6] Exit"
     print "\nEnter a number: "
   end
 
@@ -33,7 +33,7 @@ class CRM
     when 2 then modify_existing_contact
     when 3 then delete_contact
     when 4 then display_all_contacts
-    when 5 then
+    when 5
       query = search_by_attribute
       if query != nil
         print_entry(query)
@@ -45,22 +45,22 @@ class CRM
 
   # Adds a new contact, will prompt for first name, last name, and e-mail.
   def add_new_contact
-    print 'Enter First Name: '
+    print "Enter First Name: "
     first_name = gets.chomp
     breakline
 
-    print 'Enter Last Name: '
+    print "Enter Last Name: "
     last_name = gets.chomp
     breakline
 
-    print 'Enter Email Address: '
+    print "Enter Email Address: "
     email = gets.chomp
     breakline
 
-    puts 'Enter a note: '
+    puts "Enter a note: "
     note = gets.chomp
-    if note == ''
-      note = 'N/A'
+    if note == ""
+      note = "N/A"
     end
     breakpoint
 
@@ -80,13 +80,12 @@ class CRM
       puts "What would you like to modify?: "
       attribute = make_selection(false)
       value = gets.chomp.to_s
-      if value != ''
+      if value != ""
         selected_contact.update(attribute, value)
       end
       breakpoint
       print_entry(selected_contact)
       breakline
-
     end
   end
 
@@ -96,7 +95,7 @@ class CRM
     if selected_contact != nil
       print "Are you sure you want to delete #{selected_contact.full_name}? (y to continue) "
       delete_now = gets.chomp.upcase
-      if delete_now == 'Y'
+      if delete_now == "Y"
         selected_contact.delete
       end
       breakpoint
@@ -116,7 +115,7 @@ class CRM
     display_all_contacts
 
     puts "Select user by: "
-    
+
     attribute = make_selection(true)
     value = gets.chomp.upcase
 
@@ -133,16 +132,15 @@ class CRM
 
   # Chooses which attribute will be accessed. Will only show "[5] ID" for reading, not writing.
   def make_selection(id)
-    
     choose = 0
 
     loop do
-      puts '[1] First Name'
-      puts '[2] Last Name'
-      puts '[3] E-mail'
-      puts '[4] Notes'
+      puts "[1] First Name"
+      puts "[2] Last Name"
+      puts "[3] E-mail"
+      puts "[4] Notes"
       if id
-        puts '[5] ID'
+        puts "[5] ID"
       end
       print "\nEnter a number: "
 
@@ -165,21 +163,21 @@ class CRM
     end
 
     case choose
-    when 1 then
-      print 'Enter a first name: '
+    when 1
+      print "Enter a first name: "
       return "first_name"
-    when 2 then
-      print 'Enter a last name: '
+    when 2
+      print "Enter a last name: "
       return "last_name"
-    when 3 then
-      print 'Enter an e-mail address: '
+    when 3
+      print "Enter an e-mail address: "
       return "email"
-    when 4 then
-      puts 'Enter a note:'
+    when 4
+      puts "Enter a note:"
       return "note"
-    when 5 then
+    when 5
       if id
-        print 'Enter an ID #: '
+        print "Enter an ID #: "
         return "id"
       else
         return nil
@@ -198,8 +196,8 @@ class CRM
   def breakpoint
     puts "\e[H\e[2J"
   end
+
   def breakline
     puts "\n-------------------\n\n"
   end
-
 end
