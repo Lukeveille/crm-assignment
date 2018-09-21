@@ -1,0 +1,70 @@
+/* Main element resets */
+body {
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body, header, h1, h2, h2, h4, h5, ul, main, footer {
+  margin: 0;
+}
+
+/* Header elements */
+ul {
+  padding: 0;
+  list-style: none;
+}
+header, footer {
+  text-align: center;
+  color: white
+}
+header h1 {
+  background-color: #333333;
+  border-top: 3px solid #000;
+  font-size: 2em;
+  padding: 0.5em;
+}
+header nav a {
+  background-color: #d3d3d3;
+  border-top: 1px solid white;
+  display: block;
+  text-decoration: none;
+  color: white;
+  font-size: 1.5em;
+  font-weight: 800;
+  padding: 0.25em;
+}
+header nav a:hover {
+  color: #333333;
+}
+
+/* Main elements */
+h2 span {
+  text-decoration: underline;
+  text-decoration-color: #40e0d0;
+  font-weight: 800;
+}
+main h2 {
+  background-color: #fa8072;
+  font-weight: 500;
+  font-size: 1.5em;
+  padding: .6em;
+}
+main {
+  padding: 1em 2em;
+}
+main li {
+  background-color: #40e0d0;
+  padding: 1.8em;
+  margin-top: 1em;
+}
+h3 {
+  border: 0;
+  margin: 0;
+  margin-bottom: 0.2em;
+  font-size: 1.5em;
+}
+
+/* Footer elements */
+footer {
+  background-color: #000;
+  padding: 1em;
+}
