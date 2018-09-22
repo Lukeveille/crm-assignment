@@ -98,7 +98,7 @@ class CRM
     selected_contact = self.search_by_attribute
     if selected_contact != nil
       print "Are you sure you want to delete #{selected_contact.full_name}? (y to continue) "
-      delete_now = gets.chomp
+      delete_now = gets.chomp.upcase
       if delete_now == "Y"
         selected_contact.delete
       end

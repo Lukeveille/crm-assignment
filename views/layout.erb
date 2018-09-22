@@ -10,24 +10,21 @@
   </head>
 
   <body>
-    <header>
-      <h1>Bitmaker CRM</h1>
-      <nav>
-        <ul>
-          <li><a href="/home">Home</a></li>
-          <li><a href="/add_contact">Add a contact</a></li>
-          <li><a href="/about">About</a></li>
-        </ul>
-      </nav>
-    </header>
+    <div class="page_wrapper">
+      <header>
+        <h1>Bitmaker CRM</h1>
+        <nav>
+          <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/add_contact">Add a contact</a></li>
+            <li><a href="/about">About</a></li>
+          </ul>
+        </nav>
+      </header>
 
-    <main>
-      <%= yield %>
-    </main>
+      <main><%= yield %></main>
 
-    <footer>
-      © Bitmaker 2018
-    </footer>
-    <script src="" type="text/javascript" async defer></script>
+      <footer>© Bitmaker 2018</footer>
+    </div>
   </body>
 </html>
