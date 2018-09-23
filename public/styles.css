@@ -3,17 +3,13 @@ html {
   min-height: 100%;
 }
 body {
-  padding: 0;
   font-family: Arial, Helvetica, sans-serif;
-  min-height: 93.5vh;
-  padding-bottom: 6.5vh;
+  min-height: 93vh;
+  padding-bottom: 7vh;
   position: relative;
 }
 body, header, h1, h2, h2, h4, h5, ul, main, footer {
   margin: 0;
-}
-.page_wrapper {
-  margin: 0 auto;
 }
 
 /* Header elements */
@@ -82,9 +78,8 @@ li p {
 /* Footer elements */
 footer {
   background-color: #000;
-  padding: 1em;
-  position: absolute;
-  right: 0;
+  padding: 1em 0;
+  width: 100%;
   bottom: 0;
-  left: 0;
+  position: absolute;
 }
